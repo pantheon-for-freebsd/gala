@@ -1,9 +1,7 @@
+
 PORTNAME=gala
 DISTVERSION=7.1.3
 CATEGORIES=x11-wm
-
-DISTDIR=${PWD}
-# DIST_SUBDIR=distsrc
 
 MAINTAINER=inucat@proton.me
 COMMENT=Unofficial port of Gala window manager developed by elementary OS team
@@ -11,19 +9,18 @@ WWW=https://github.com/elementary/gala
 
 LICENSE=GPLv3
 
-USE_GITHUB=yes
-GH_ACCOUNT=elementary
+USES=	gettext-tools meson ninja vala #pkgconfig
+MESON_ARGS=	--prefix=${PREFIX}
+MESON_BUILD_DIR=	build
+USE_GITHUB=	yes
+GH_ACCOUNT=	elementary
 
 BUILD_DEPENDS=\
-		meson:devel/meson \
-		valac:lang/vala \
-		gettext:devel/gettext-tools \
 		glib-compile-resources:devel/glib20 \
+		#valac:lang/vala \
+		#meson:devel/meson \
 		#pkgconf
-
-#RUN_DEPENDS=\
-#		gnome-settings-daemon:
-
+		#gettext:devel/gettext-tools
 LIB_DEPENDS=\
 		libcanberra.so:audio/libcanberra \
 		libclutter-1.0.so:graphics/clutter \
@@ -39,11 +36,13 @@ LIB_DEPENDS=\
 		libmutter-10.so:x11-wm/mutter \
 		#gnome-settings-daemon-42/libgsd.so:sysutils/gnome-settings-daemon \
 
+DISTDIR=${PWD}
+
 # Dependency gio-unix-2.0 found: YES 2.80.2 (cached)
 # Dependency gdk-x11-3.0 found: YES 3.24.42 (cached)
 
 do-build:
-	cd ${WRKSRC} && meson setup build --prefix=/usr/local
+	cd ${WRKSRC} && meson setup build #--prefix=${PREFIX}
 	cd ${WRKSRC}/build && ninja
 
 do-install:

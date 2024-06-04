@@ -9,6 +9,10 @@ WWW=	https://github.com/elementary/gala
 
 LICENSE=	GPLv3
 
+BUILD_DEPENDS=\
+		update-desktop-database:devel/desktop-file-utils \
+		#
+
 LIB_DEPENDS=\
 		libcanberra.so:audio/libcanberra \
 		libclutter-1.0.so:graphics/clutter \

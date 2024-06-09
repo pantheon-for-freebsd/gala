@@ -15,25 +15,26 @@ BUILD_DEPENDS=\
 
 LIB_DEPENDS=\
 		libcanberra.so:audio/libcanberra \
-		libclutter-1.0.so:graphics/clutter \
 		libgee-0.8.so:devel/libgee \
 		libgexiv2.so:graphics/gexiv2 \
 		libgranite.so:x11-toolkits/granite \
 		libmutter-10.so:x11-wm/mutter \
+		libgraphene-1.0.so:graphics/graphene \
+		# libclutter-1.0.so:graphics/clutter \
 		#
 
 USES=	gettext-tools meson ninja vala pkgconfig gnome #xorg
 MESON_ARGS=	--prefix=${PREFIX}
 MESON_BUILD_DIR=	build
-USE_GNOME=	gtk30 glib20 gnomedesktop3
-# USE_XORG=	x11
+USE_GNOME=	gtk30 glib20 gnomedesktop3 cairo gdkpixbuf2
+USE_XORG=	xfixes
 USE_GITHUB=	yes
 GH_ACCOUNT=	elementary
 
 DISTDIR=	${PWD}
 
 do-build:
-	cd ${WRKSRC} && meson setup build
+	cd ${WRKSRC} && meson setup build --destdir ${WRKSRC}/stage
 	cd ${WRKSRC}/build && ninja
 
 do-install:

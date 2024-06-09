@@ -18,8 +18,8 @@ LIB_DEPENDS=\
 		libgee-0.8.so:devel/libgee \
 		libgexiv2.so:graphics/gexiv2 \
 		libgranite.so:x11-toolkits/granite \
-		libmutter-10.so:x11-wm/mutter \
 		libgraphene-1.0.so:graphics/graphene \
+		libmutter-10.so:x11-wm/mutter \
 		# libclutter-1.0.so:graphics/clutter \
 		#
 

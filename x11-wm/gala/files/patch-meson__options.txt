@@ -1,0 +1,7 @@
+--- meson_options.txt.orig	2024-06-03 09:56:18 UTC
++++ meson_options.txt
+@@ -1,3 +1,3 @@ option ('documentation', type : 'boolean', value : fal
+ option ('documentation', type : 'boolean', value : false)
+-option ('systemd', type : 'boolean', value : true)
++option ('systemd', type : 'boolean', value : false)
+ option ('systemduserunitdir', type : 'string', value : '')

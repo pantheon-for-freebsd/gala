@@ -1,13 +1,13 @@
 
-PORTNAME=	gala
-DISTVERSION=	7.1.3
-CATEGORIES=	x11-wm
+PORTNAME=gala
+DISTVERSION=7.1.3
+CATEGORIES=x11-wm
 
-MAINTAINER=	inucat@proton.me
-COMMENT=	Unofficial port of Gala window manager developed by elementary OS team
-WWW=	https://github.com/elementary/gala
+MAINTAINER=inucat@proton.me
+COMMENT=Unofficial port of Gala window manager developed by elementary OS team
+WWW=https://github.com/elementary/gala
 
-LICENSE=	GPLv3
+LICENSE=GPLv3
 
 BUILD_DEPENDS=\
 		update-desktop-database:devel/desktop-file-utils \
@@ -23,21 +23,19 @@ LIB_DEPENDS=\
 		# libclutter-1.0.so:graphics/clutter \
 		#
 
-USES=	gettext-tools meson ninja vala pkgconfig gnome #xorg
-MESON_ARGS=	--prefix=${PREFIX}
-MESON_BUILD_DIR=	build
-USE_GNOME=	gtk30 glib20 gnomedesktop3 cairo gdkpixbuf2
-USE_XORG=	xfixes
-USE_GITHUB=	yes
-GH_ACCOUNT=	elementary
-
-DISTDIR=	${PWD}
+USES=gettext-tools meson ninja vala pkgconfig gnome xorg
+MESON_ARGS=--prefix=${PREFIX}
+MESON_BUILD_DIR=build
+USE_GNOME=gtk30 glib20 gnomedesktop3 cairo gdkpixbuf2
+USE_XORG=xfixes
+USE_GITHUB=yes
+GH_ACCOUNT=elementary
 
 do-build:
-	cd ${WRKSRC} && meson setup build --destdir ${WRKSRC}/stage
+	cd ${WRKSRC} && meson setup build
 	cd ${WRKSRC}/build && ninja
 
-do-install:
-	cd ${WRKSRC}/build && ninja install
+do-stage:
+	cd ${WRKSRC}/build && DESTDIR=${WRKSRC}/../stage ninja install
 
 .include <bsd.port.mk>
